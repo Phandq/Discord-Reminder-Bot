@@ -1,1 +1,1 @@
-Discord Gif Bot
+Discord Bot

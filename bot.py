@@ -1,7 +1,3 @@
-# Client ID : 574722367478300673
-# Token ID : NTc0NzIyMzY3NDc4MzAwNjcz.XM9iMA.GCz6rgsnZtqAtfLe2fgPuPzTEz8
-# Permission integer : 67584
-
 # Uses discord.py 1.2.3
 
 import discord, random, requests, json, asyncio

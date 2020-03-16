@@ -1,4 +1,5 @@
 # Uses discord.py 1.2.3
+#
 
 import discord, random, requests, json, asyncio
 from discord.ext import commands
@@ -19,9 +20,14 @@ def getQuote(): # Get quote from api
 
 bot = commands.Bot(command_prefix='!')
 
-bot.load_extension("cogs.magic8ball")
-bot.load_extension("cogs.ping")
-bot.load_extension("cogs.quotes")
+# create loop to load cogs by folder path
+cogExtensions = ["cogs.magic8ball", "cogs.ping", "cogs.quotes", "cogs.remind", "cogs.poll"]
+
+for extension in cogExtensions:
+    try:
+        bot.load_extension(extension)
+    except Exception:
+        print(f"Failed to load extension: {extension}")
 
 @bot.event # event decorator/wrapper
 async def on_ready():
@@ -43,42 +49,6 @@ async def notify():
             time = 1
         await asyncio.sleep(time)
 
-# @bot.command()
-# async def ping(ctx):
-#     latency = round(bot.latency * 1000)
-#     await ctx.send(":ping_pong: {}ms".format(latency))
-
-# @bot.command()
-# async def magic8ball(ctx):
-#     responses = [
-#         ':8ball: It is certain',
-#         ':8ball: It is decidedly so',
-#         ':8ball: Without a doubt',
-#         ':8ball: Yes definitely',
-#         ':8ball: You may rely on it',
-#         ':8ball: As I see it, yes',
-#         ':8ball: Most likely',
-#         ':8ball: Outlook good',
-#         ':8ball: Yes',
-#         ':8ball: Signs point to yes',
-#         ':8ball: Reply hazy try again',
-#         ':8ball: Ask again later',
-#         ':8ball: Better not tell you now',
-#         ':8ball: Cannot predict now',
-#         ':8ball: Concentrate and ask again',
-#         ':8ball: Do not count on it',
-#         ':8ball: My reply is no',
-#         ':8ball: My sources say no',
-#         ':8ball: Outlook not so good',
-#         ':8ball: Very doubtful'
-#     ]
-
-#     await ctx.send(random.choice(responses))
-
-# @bot.command()
-# async def quote(ctx):
-#     await ctx.send(getQuote())
-
 @bot.command()
 async def sleep(ctx):
     if str(ctx.author) == "Dreadin#9400":
@@ -94,11 +64,12 @@ bot.run(token.strip())
 # https://www.devdungeon.com/content/make-discord-bot-python-part-2
 
 # TO DO: 
-# Add ping (latency)
-# Add quotes?
-# Add polls, using emoji?
+# Add vote, using emoji - reaction poll https://github.com/stayingqold/Poll-Bot/tree/master/cogs
+# Add polls https://github.com/Kati3e/KatBot-Discord
 # Birthday notification?
 # Incorporate DB
 # Pillow (image manupulation)
 # Game notification (ex. TFT news)
 # Get weather
+# Simple plugin that logs every message to file
+# Reminder that is sent through a DM

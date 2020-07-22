@@ -8,19 +8,10 @@ These instructions are intended to get you a copy of the project up and running 
 
 ### Prerequisites
 
-Software and tools required to deploy InnoBot.
+Software required to deploy InnoBot.
 
 ```
-Version Control:
-git 2.23.0 or higher 
-
-Programming Language:
-Python 3.8.0 or higher 
-
-Python Packages:
-
-API Wrapper:
-discord.py 1.2.3 or higher 
+Ansible 2.9.6 or higher
 ```
 
 ### Installing

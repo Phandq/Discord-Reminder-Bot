@@ -1,9 +1,9 @@
 # Uses discord.py 1.2.3
 #
 
-import discord, random, requests, json, asyncio
+import discord, random, requests, json, asyncio, configparser
 from discord.ext import commands
-from config import token
+#from config import token
 from datetime import datetime
 
 def getQuote(): # Get quote from api
@@ -57,6 +57,10 @@ async def sleep(ctx):
 
 
 bot.loop.create_task(notify())
+
+conf = configparser.RawConfigParser()
+conf.read('config.ini') # cmd must be in DiscordBot directory to run the bot script
+token = conf.get('Bot', 'token')
 
 bot.run(token.strip())
 

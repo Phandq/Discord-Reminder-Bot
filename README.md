@@ -16,10 +16,11 @@ Ansible 2.9.6 or higher
 
 ## To Run
 
-* Download the InnoBot repository using git clone or as a zip file.
-* Open ```config.ini``` and enter your Discord bot token.
-
-
+1. Host on local computer:
+  1.1. Use commmand ```ansible-playbook reminderbot_setup.yml``` to automate the installation of the dependencies.
+  1.2. Open ```config.ini``` and enter your Discord bot token.
+  1.3. Start the reminder bot by executing the ```bot.py``` file.
+2. Host on AWS EC2 (t2.micro):
 
 ### Usage
 <!---
@@ -37,3 +38,5 @@ Hours use the 'h' character
   e.g. 5h, 5 hours
 ```
 --->
+
+## To-do

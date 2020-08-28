@@ -25,12 +25,10 @@ Ansible 2.9.6 or higher
    * Open ```host``` file and add the IP address of the t2.micro instance under ```[Discord-bot]```.
    * Use command ```ansible-playbook ec2_reminderbot.yml --private-key AWSkey_file  -u user``` to automate the installation of the dependencies and start the reminder bot in the background process.
 
-### Usage
-<!---
+## Usage
 ```
-!commands Shows a list of all the commands
-!remindme {time} {message} Reminds the author a specific message after the given time interval.
-
+!remind {time} {message} Reminds the author a specific message after the given time interval.
+  Ex., !remind 5m check mail
 
 Time Intervals
 Seconds use the 's' character 
@@ -40,6 +38,8 @@ Minutes use the 'm' character
 Hours use the 'h' character 
   e.g. 5h, 5 hours
 ```
---->
 
 ## To-do
+* Database for permanant reminders.
+* Delete reminders.
+

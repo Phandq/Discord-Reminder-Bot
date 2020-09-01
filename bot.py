@@ -3,7 +3,6 @@
 
 import discord, random, requests, json, asyncio, configparser
 from discord.ext import commands
-#from config import token
 from datetime import datetime
 
 bot = commands.Bot(command_prefix='!')

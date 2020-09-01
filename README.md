@@ -15,7 +15,7 @@ Ansible 2.9.6 or higher
 ```
 
 ## To Run
-
+Linux:
 * Host on local computer:
    * ```git clone``` or download the the respository as a zip file.
    * Open ```config.ini``` and enter your Discord bot token.
@@ -24,6 +24,9 @@ Ansible 2.9.6 or higher
    * Deploy t2.micro instance in AWS free tier using the command ```ansible-playbook ec2_t2micro.yml```.
    * Open ```host``` file and add the IP address of the t2.micro instance under ```[Discord-bot]```.
    * Use command ```ansible-playbook ec2_reminderbot.yml --private-key AWSkey_file  -u user``` to automate the installation of the dependencies and start the reminder bot in the background process.
+
+Windows:
+
 
 ## Usage
 ```
@@ -40,6 +43,6 @@ Hours use the 'h' character
 ```
 
 ## To-do
-* Database for permanant reminders.
+* Database for recurring reminders.
 * Delete reminders.
 

@@ -1,0 +1,61 @@
+# ansible-playbook ec2_innobot.yml --private-key ~/AWS-firstinstance.pem  -u ubuntu
+---
+- hosts: Discord-bot
+  name: configuration play
+  user: ubuntu
+  gather_facts: true
+  #remote_user: ubuntu
+
+  vars:
+          packages:
+                  - python3
+                  - python3-pip
+                  - git
+
+  tasks:
+        - name: Update cache
+          become: true
+          apt: 
+                upgrade: yes
+                update_cache: yes
+                cache_valid_time: 86400
+        
+        - name: Install packages
+          become: true
+          apt:
+                  pkg: "{{ packages }}"
+                  state: present
+                  update_cache: yes
+                  
+        - pip:
+                name:
+                        #- setuptools
+                        - discord.py
+                        - config
+                        - requests
+                        - asyncio
+                        - bounded-pool-executor
+                        - configparser
+                executable: pip3        
+
+        - name: Clone Innobot git repository
+          git: 
+                repo: git@github.com:Phandq/InnoBot.git
+                dest: ~/gitrepo/innobot
+                accept_hostkey: yes
+                key_file: ~/.ssh/id_rsa_innbot
+                update: no
+                #force: yes
+                #become_user: root
+                #become: true #eventually replace with ssh keys
+
+          #Must have token before running the script
+        - name: Execute Innobot
+          command: python3 /etc/gitrepo/innobot/bot.py
+          args:
+                chdir: /etc/gitrepo/innobot
+          # Script will run in background 
+          # Close the playbook by specifying a timeout using Asynchronous Actions and Polling
+          async: 10
+          poll: 0
+

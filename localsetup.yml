@@ -1,0 +1,50 @@
+---
+- hosts: localhost
+
+  vars:
+          packages:
+                  - python
+                  - python3-pip
+                  - git
+
+  tasks:
+        - name: Update cache
+          become: true
+          apt:
+                upgrade: yes
+                update_cache: yes
+                cache_valid_time: 86400
+
+        - name: Install packages
+          become: true
+          apt:
+                  pkg: "{{ packages }}"
+                  state: present
+                  update_cache: yes
+
+        - pip:
+                name:
+                        - discord.py
+                        - config
+                        - requests
+                        - asyncio
+                        - bounded-pool-executor
+                        - configparser
+                executable: pip3
+
+        - name: Clone Innobot git repository
+          git:
+                repo: https://github.com/Phandq/Discord-Reminder-Bot.git
+                dest: /etc/gitrepo/Discord-Reminder-Bot
+                force: yes
+          become: true #eventually replace with ssh keys
+
+          #Must have token before running the script
+        - name: Execute Innobot
+          command: python3 /etc/gitrepo/Discord-Reminder-Bot/bot.py
+          args:
+                chdir: /etc/gitrepo/Discord-Reminder-Bot
+          # Script will run in background
+          # Close the playbook by specifying a timeout using Asynchronous Actions and Polling
+          async: 10
+          poll: 0
